@@ -26,42 +26,31 @@ const Emi = () => {
 
     const calculate = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
-
     }
-    let EmiDEtails = [];
+ 
     const handleButtonClick = (event) => {
         event.preventDefault();
-
         const newRecord = { ...data };
-
         const interests = (data.amount * (data.rate * 0.01)) / data.months;
-
         const emipermonth = ((data.amount / data.months) + interests).toFixed(2);
-
-
-        // let EmiDEtails = [];
         for (let i = 1; i <= data.months; i++) {
-            EmiDEtails.push(emipermonth);
+            emidates.push({
+                month: emipermonth
+            });
         }
-
-
-        console.log(EmiDEtails, "Emi details")
-        // console.log(emipermonth, interests)
+        console.log(emidates)
         setEmployees([...employees, newRecord]);
         setData({
             amount: "",
             rate: "",
             months: ""
         })
+        // setEmidates(EmiDEtails)
+        console.log(emidates)
     }
-    // console.log(EmiDEtails, "Emi details")
     return (
         <div className='maindiv'>
-
-
             <div className="calculator">
-
-
                 <h1>EMI Calculator</h1>
                 <form onSubmit={handleButtonClick} id="sample-form" method="post" >
                     <p>Amount (₹):
@@ -74,9 +63,8 @@ const Emi = () => {
                         <input id="months" type="number" name='months' value={data.months} placeholder="Please Enter your Month" onChange={calculate} />
                     </p>
                     <button type="submit">Submit</button>
+                   
                 </form>
-
-
             </div>
             <div>
                 <table border="2px">
@@ -84,17 +72,22 @@ const Emi = () => {
                         <th>Total Months</th>
                         <th>EMI per month</th>
                     </tr>
+                    {emidates.map((items, index) => (
+                        <tr >
+                            <td>Month {index + 1}</td>
+                            <td> {items.month}</td>
+                        </tr>
+                    ))}
                 </table>
             </div>
-            <button
+            <button 
                 onClick={() => setToggle(!toggle)}
-                class="btn btn-primary mb-5">
+                class="btn btn-primary mb-5 btn2">
                 Click here for History
             </button>
             {toggle && (
                 <Result list={employees} />
             )}
-
         </div>
     )
 }
