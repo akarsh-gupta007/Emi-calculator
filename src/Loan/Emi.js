@@ -8,7 +8,7 @@ const Emi = () => {
     const [dates, setDates] = useState([]);
     const [emidates, setEmidates] = useState([]);
     const [toggle, setToggle] = useState(true);
-    const [toggleHistory,setToggleHistory]=useState(true);
+    
     const [data, setData] = useState({
         amount: "",
         rate: "",
@@ -24,7 +24,7 @@ const Emi = () => {
         }
         setDates(datesArray);
 
-    }, [dates.months]);
+    }, [dates,months]);
 
     const calculate = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
