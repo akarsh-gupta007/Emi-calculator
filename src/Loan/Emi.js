@@ -24,7 +24,7 @@ const Emi = () => {
         }
         setDates(datesArray);
 
-    }, [dates,months]);
+    }, [data.months]);
 
     const calculate = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
